@@ -27,8 +27,7 @@ public class ActividadPrincipal extends AppCompatActivity {
     CanalCast mCanalCast = new CanalCast();
     private CastSession mCastSession;
     private SessionManager mSessionManager;
-    private Button btnSendMessage, btnBackgroundBlue, btnBackgroundRed, btnBackgroundYellow,
-            btnBackgroundwhite, btnBackgroundBlack;
+    private Button btnSendMessage, btnBackgroundBlue, btnBackgroundRed, btnBackgroundBlack;
     private EditText etMessage;
 
     @Override
@@ -42,11 +41,11 @@ public class ActividadPrincipal extends AppCompatActivity {
         btnSendMessage = (Button) findViewById(R.id.btn_send_message);
         btnBackgroundBlue = (Button) findViewById(R.id.btn_blue_background);
         btnBackgroundRed = (Button) findViewById(R.id.btn_red_background);
-        btnBackgroundYellow = (Button) findViewById(R.id.btn_yellow_background);
-        btnBackgroundwhite = (Button) findViewById(R.id.btn_white_background);
         btnBackgroundBlack = (Button) findViewById(R.id.btn_black_background);
         btnSendMessage.setOnClickListener(btnClickListener);
-
+        btnBackgroundBlue.setOnClickListener(btnClickListener);
+        btnBackgroundRed.setOnClickListener(btnClickListener);
+        btnBackgroundBlack.setOnClickListener(btnClickListener);
     }
 
     @Override
@@ -76,12 +75,6 @@ public class ActividadPrincipal extends AppCompatActivity {
                     break;
                 case R.id.btn_red_background:
                     sendMessage("#F#red");
-                    break;
-                case R.id.btn_yellow_background:
-                    sendMessage("#F#yellow");
-                    break;
-                case R.id.btn_white_background:
-                    sendMessage("#F#white");
                     break;
                 case R.id.btn_black_background:
                     sendMessage("#F#black");
@@ -151,8 +144,6 @@ public class ActividadPrincipal extends AppCompatActivity {
         btnSendMessage.setEnabled(enabled);
         btnBackgroundBlue.setEnabled(enabled);
         btnBackgroundRed.setEnabled(enabled);
-        btnBackgroundYellow.setEnabled(enabled);
-        btnBackgroundwhite.setEnabled(enabled);
         btnBackgroundBlack.setEnabled(enabled);
     }
 
