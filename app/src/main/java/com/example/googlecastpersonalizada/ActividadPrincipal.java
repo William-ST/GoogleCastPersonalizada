@@ -2,9 +2,11 @@ package com.example.googlecastpersonalizada;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.cast.Cast;
@@ -25,8 +27,9 @@ public class ActividadPrincipal extends AppCompatActivity {
     CanalCast mCanalCast = new CanalCast();
     private CastSession mCastSession;
     private SessionManager mSessionManager;
-    private Button textoButton;
-    private Button fondoButton;
+    private Button btnSendMessage, btnBackgroundBlue, btnBackgroundRed, btnBackgroundYellow,
+            btnBackgroundwhite, btnBackgroundBlack;
+    private EditText etMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,14 @@ public class ActividadPrincipal extends AppCompatActivity {
         CastContext castContext = CastContext.getSharedInstance(this);
 
         mSessionManager = castContext.getSessionManager();
-        textoButton = (Button) findViewById(R.id.btn_texto);
-        textoButton.setOnClickListener(btnClickListener);
-        fondoButton = (Button) findViewById(R.id.btn_fondo);
-        fondoButton.setOnClickListener(btnClickListener);
+        etMessage = (EditText) findViewById(R.id.et_input);
+        btnSendMessage = (Button) findViewById(R.id.btn_send_message);
+        btnBackgroundBlue = (Button) findViewById(R.id.btn_blue_background);
+        btnBackgroundRed = (Button) findViewById(R.id.btn_red_background);
+        btnBackgroundYellow = (Button) findViewById(R.id.btn_yellow_background);
+        btnBackgroundwhite = (Button) findViewById(R.id.btn_white_background);
+        btnBackgroundBlack = (Button) findViewById(R.id.btn_black_background);
+        btnSendMessage.setOnClickListener(btnClickListener);
 
     }
 
@@ -54,11 +61,30 @@ public class ActividadPrincipal extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_texto:
-                    sendMessage("#T#hola");
+                case R.id.btn_send_message:
+                    final String message = etMessage.getText().toString();
+                    if (TextUtils.isEmpty(message)) {
+                        Toast.makeText(ActividadPrincipal.this, "Ingresa un mensaje", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    sendMessage("#T#"+message);
+                    etMessage.setText("");
+                    etMessage.requestFocus();
                     break;
-                case R.id.btn_fondo:
+                case R.id.btn_blue_background:
                     sendMessage("#F#blue");
+                    break;
+                case R.id.btn_red_background:
+                    sendMessage("#F#red");
+                    break;
+                case R.id.btn_yellow_background:
+                    sendMessage("#F#yellow");
+                    break;
+                case R.id.btn_white_background:
+                    sendMessage("#F#white");
+                    break;
+                case R.id.btn_black_background:
+                    sendMessage("#F#black");
                     break;
             }
         }
@@ -121,8 +147,13 @@ public class ActividadPrincipal extends AppCompatActivity {
     }
 
     private void setSessionStarted(boolean enabled) {
-        textoButton.setEnabled(enabled);
-        fondoButton.setEnabled(enabled);
+        etMessage.setEnabled(enabled);
+        btnSendMessage.setEnabled(enabled);
+        btnBackgroundBlue.setEnabled(enabled);
+        btnBackgroundRed.setEnabled(enabled);
+        btnBackgroundYellow.setEnabled(enabled);
+        btnBackgroundwhite.setEnabled(enabled);
+        btnBackgroundBlack.setEnabled(enabled);
     }
 
     @Override
